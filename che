@@ -1,0 +1,128 @@
+                                                                                 //LEAKY
+/*
+#include<iostream>
+
+using namespace std;
+
+int main(){
+    int bucket,outrate,input,time=0;
+    int storage=0;
+
+cout<<"enter bucket size"<<endl;
+cin>>bucket;
+
+cout<<"enter output rate"<<endl;
+cin>>outrate;
+
+while(1){
+time++;
+cout<<"at time "<<time;
+cout<<"enter input"<<endl;
+cin>>input;
+if(input==0)
+break;
+int t=input+storage;
+
+if(t>bucket)
+{
+    cout<<"overflow dropped"<<endl;
+    int over=input+storage-bucket;
+    cout<<over<<endl;
+    storage=bucket;
+    
+}
+else
+storage=storage+input;
+cout<<"storage "<<storage<<endl;
+
+
+if(storage>=outrate){
+    storage=storage-outrate;
+    cout<<"sent "<<outrate<<endl;
+    cout<<"remaining "<<storage<<endl;
+}
+else{
+    cout<<"sent "<<storage<<endl;
+    cout<<"remaining 0"<<endl;
+    storage=0;
+    
+}
+}
+    return 0;
+}
+
+*/
+  
+
+
+
+
+  /*                                                                     //SLIDING
+#include<iostream>
+using namespace std;
+
+int main(){
+
+    int w,i,f=0;
+    int frames[50];
+
+    cout<<"enter window"<<endl;
+    cin>>w;
+    cout<<"enter total frames"<<endl;
+    cin>>f;
+    cout<<"enter"<<f<< "frames"<<endl;
+    for(i=1;i<=f;i++){
+        cin>>frames[i];
+    }
+    
+    cout<<w<<"frames will be sent then wait for ack"<<endl;
+
+    for(i=1;i<=f;i++){
+        if(i%w==0){
+            cout<<frames[i]<<endl;
+            cout<<"ac recieved"<<endl;
+        }
+            else{
+               cout<< frames[i]<<" ";            
+        }
+    }
+
+    if(f%w!=0){
+        cout<<"ack recieve";
+    }
+
+    return 0;
+}
+*/
+
+//URL
+
+
+#include<iostream>
+#include<string>
+#include<regex>
+using namespace std;
+
+void Spiliturl(const string& url){
+    regex urlpattern(R"((https?|ftp)://([^/]+)(/[^?]*)?(\?[^#]*)?)");
+    smatch match;
+    if(regex_match(url, match, urlpattern)){
+        cout << "Protocol: " << match[1].str() << endl;
+        cout << "Domain: " << match[2].str() << endl;
+        cout << "Path: " << (match[3].str().empty()? ("/"): match[3].str())<< endl;
+        cout << "Query: " << (match[4].str().empty()? (""): match[4].str())<<endl;
+}
+
+else{
+    cout << "Invalid URL" << endl;
+}
+}
+
+int main(){
+    string url;
+    cout << "Enter a URL: ";
+    getline(cin,url);
+    Spiliturl(url);
+
+    return 0;
+}
